@@ -1,5 +1,5 @@
 
-# LAB 1 | FCFS CPU Scheduling
+# LAB 1 | First Come First Serve CPU Scheduling
 
 def fcfs_scheduling():
     num = int(input("Enter the number of processes: "))
