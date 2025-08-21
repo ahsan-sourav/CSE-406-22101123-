@@ -1,1 +1,1 @@
-it is a lab repo where i upload all my lab tasks and assingments 
+It is a lab repo where i upload all my lab tasks and assingments.

@@ -1,40 +1,25 @@
 # LAB 7 | SCAN Disk Scheduling (direction = left) algorithm
 
-def scan_disk_scheduling(requests, head):
-    requests.sort()
-    left = []
-    right = []
-
-    for request in requests:
-        if request < head:
-            left.append(request)
-        elif request > head:
-            right.append(request)
-
-    left.sort(reverse=True)
-    right.sort() 
-
-    total_seek_count = 0
-    sequence = []
-
-    for i in range(len(left)):
-        total_seek_count += abs(head - left[i])
-        head = left[i]
-        sequence.append(head)
-
-    total_seek_count += abs(head - 0)
-    head = 0
-    for i in range(len(right)):
-        total_seek_count += abs(head - right[i])
-        head = right[i]
-        sequence.append(head)
-    return total_seek_count, sequence
-
-requests_input = input("Enter the request sequence (separated by spaces): ")
-requests = list(map(int, requests_input.split()))
+requests = list(map(int, input("Enter request sequence (space-separated): ").split()))
 head = int(input("Enter the initial head position: "))
+requests.sort()
 
-seek_count, sequence = scan_disk_scheduling(requests, head)
+seek_count = 0
+accessed_tracks = []
 
-print(f"Total Seek Count: {seek_count}")
-print(f"Sequence of Accessed Tracks: {sequence}")
+left = [track for track in requests if track <= head]
+right = [track for track in requests if track > head]
+
+for track in reversed(left):
+    seek_count += abs(head - track)
+    head = track
+    accessed_tracks.append(track)
+
+for track in right:
+    seek_count += abs(head - track)
+    head = track
+    accessed_tracks.append(track)
+
+# Output the results
+print("Accessed track sequence:", accessed_tracks)
+print("Total seek time:", seek_count)
