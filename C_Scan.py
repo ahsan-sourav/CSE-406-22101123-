@@ -36,7 +36,7 @@ else:
         seek_sequence.append(0)
         total_movement += abs(cur - 0)
         cur = 0
-    for r in right:
+    for r in right: # for all 
         seek_sequence.append(r)
         total_movement += abs(cur - r)
         cur = r
